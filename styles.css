@@ -69,7 +69,7 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .seal:before { content:''; position:absolute; inset:7px; border:1px solid rgba(255,230,170,.48); border-radius:50%; }
 .seal span { font-size: 9px; margin: 0 4px; }
 .rose-burst { position:fixed; z-index:95; width:0; height:0; pointer-events:none; }
-.burst-rose { position:absolute; left:0; top:0; display:block; font-size:var(--rose-size); line-height:1; transform:translate(-50%,-50%) scale(.15); opacity:0; filter:drop-shadow(0 5px 4px rgba(83,19,18,.3)); animation:rose-burst 1.75s var(--rose-delay) cubic-bezier(.2,.8,.2,1) forwards; }
+.burst-rose { position:absolute; left:0; top:0; display:block; font-size:var(--rose-size); line-height:1; transform:translate3d(-50%,-50%,0) scale(.12); opacity:0; text-shadow:0 4px 4px rgba(83,19,18,.2); will-change:transform,opacity; backface-visibility:hidden; animation:rose-burst 2.1s var(--rose-delay) cubic-bezier(.12,.72,.18,1) forwards; }
 .open-copy {
   position: absolute; top: calc(50% + min(30vw,215px)); display: flex; align-items: center;
   gap: 14px; text-transform: uppercase; letter-spacing: .28em; font-size: 8px; color: var(--muted);
@@ -209,7 +209,7 @@ footer small { font-size:7px; letter-spacing:.42em; color:#948771; }
 
 @keyframes foil { to { background-position:220% center; } }
 @keyframes draw { to { stroke-dashoffset:0; } }
-@keyframes rose-burst { 0% { opacity:0; transform:translate(-50%,-50%) scale(.15) rotate(0deg); } 20% { opacity:1; transform:translate(calc(-50% + var(--rose-mid-x)),calc(-50% + var(--rose-mid-y))) scale(1.08) rotate(var(--rose-rotation)); } 48% { opacity:1; transform:translate(calc(-50% + var(--rose-x)),var(--rose-y)) scale(1) rotate(var(--rose-rotation)); } 100% { opacity:0; transform:translate(calc(-50% + var(--rose-end-x)),var(--rose-end-y)) scale(.78) rotate(calc(var(--rose-rotation) + 24deg)); } }
+@keyframes rose-burst { 0% { opacity:0; transform:translate3d(-50%,-50%,0) scale(.12) rotate(0deg); } 16% { opacity:1; transform:translate3d(calc(-50% + var(--rose-mid-x)),calc(-50% + var(--rose-mid-y)),0) scale(1.08) rotate(var(--rose-rotation)); } 62% { opacity:1; transform:translate3d(calc(-50% + var(--rose-x)),var(--rose-y),0) scale(1) rotate(calc(var(--rose-rotation) + 12deg)); } 100% { opacity:0; transform:translate3d(calc(-50% + var(--rose-end-x)),var(--rose-end-y),0) scale(.82) rotate(calc(var(--rose-rotation) + 28deg)); } }
 
 @media (max-width:760px) {
   .intro-border,.gold-frame { inset:12px; }

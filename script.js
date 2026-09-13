@@ -6,7 +6,8 @@ const content = document.querySelector('#content');
 function createRoseBurst() {
   const burst = document.createElement('div');
   const envelopeBounds = openButton.getBoundingClientRect();
-  const roseCount = window.matchMedia('(max-width: 760px)').matches ? 10 : 18;
+  const isMobile = window.matchMedia('(max-width: 760px)').matches;
+  const roseCount = isMobile ? 9 : 16;
 
   burst.className = 'rose-burst';
   burst.setAttribute('aria-hidden', 'true');
@@ -17,7 +18,7 @@ function createRoseBurst() {
     const rose = document.createElement('span');
     const angle = (index / roseCount) * Math.PI * 2 + (Math.random() - .5) * .7;
     const distance = Math.min(envelopeBounds.width * .7, 180) * (.72 + Math.random() * .4);
-    const size = 23 + Math.random() * 25;
+    const size = isMobile ? 27 + Math.random() * 24 : 32 + Math.random() * 31;
 
     rose.className = 'burst-rose';
     rose.textContent = '🌹';
@@ -25,16 +26,16 @@ function createRoseBurst() {
     rose.style.setProperty('--rose-y', `${Math.sin(angle) * distance - 35}px`);
     rose.style.setProperty('--rose-mid-x', `${Math.cos(angle) * distance * .55}px`);
     rose.style.setProperty('--rose-mid-y', `${(Math.sin(angle) * distance - 35) * .55}px`);
-    rose.style.setProperty('--rose-end-x', `${Math.cos(angle) * distance * 1.12}px`);
-    rose.style.setProperty('--rose-end-y', `${(Math.sin(angle) * distance - 35) * 1.12 - 18}px`);
+    rose.style.setProperty('--rose-end-x', `${Math.cos(angle) * distance * 1.3}px`);
+    rose.style.setProperty('--rose-end-y', `${(Math.sin(angle) * distance - 35) * 1.3 - 24}px`);
     rose.style.setProperty('--rose-size', `${size}px`);
     rose.style.setProperty('--rose-rotation', `${Math.round(Math.random() * 70 - 35)}deg`);
     rose.style.setProperty('--rose-delay', `${Math.random() * 100}ms`);
     burst.appendChild(rose);
   }
 
-  intro.appendChild(burst);
-  window.setTimeout(() => burst.remove(), 2100);
+  document.body.appendChild(burst);
+  window.setTimeout(() => burst.remove(), 2400);
 }
 
 function text(id, value) {
