@@ -68,6 +68,18 @@ a, button { -webkit-tap-highlight-color: transparent; }
 }
 .seal:before { content:''; position:absolute; inset:7px; border:1px solid rgba(255,230,170,.48); border-radius:50%; }
 .seal span { font-size: 9px; margin: 0 4px; }
+.opening-roses { position:absolute; z-index:6; left:50%; top:50%; width:min(74vw,470px); height:min(42vw,250px); pointer-events:none; opacity:0; }
+.opening-roses span { position:absolute; left:50%; top:50%; opacity:0; display:block; font-size:clamp(2rem,5vw,3.8rem); filter:drop-shadow(0 6px 5px rgba(83,19,18,.25)); }
+.opening-roses span:nth-child(1) { --rose-x:-155px; --rose-y:-72px; --rose-r:-24deg; }
+.opening-roses span:nth-child(2) { --rose-x:-75px; --rose-y:-105px; --rose-r:-10deg; }
+.opening-roses span:nth-child(3) { --rose-x:0px; --rose-y:-120px; --rose-r:0deg; }
+.opening-roses span:nth-child(4) { --rose-x:78px; --rose-y:-99px; --rose-r:12deg; }
+.opening-roses span:nth-child(5) { --rose-x:152px; --rose-y:-65px; --rose-r:25deg; }
+.intro.open .opening-roses span { animation:rose-pop 1.65s cubic-bezier(.2,.8,.2,1) forwards; }
+.intro.open .opening-roses span:nth-child(2) { animation-delay:.06s; }
+.intro.open .opening-roses span:nth-child(3) { animation-delay:.12s; }
+.intro.open .opening-roses span:nth-child(4) { animation-delay:.18s; }
+.intro.open .opening-roses span:nth-child(5) { animation-delay:.24s; }
 .open-copy {
   position: absolute; top: calc(50% + min(30vw,215px)); display: flex; align-items: center;
   gap: 14px; text-transform: uppercase; letter-spacing: .28em; font-size: 8px; color: var(--muted);
@@ -207,6 +219,7 @@ footer small { font-size:7px; letter-spacing:.42em; color:#948771; }
 
 @keyframes foil { to { background-position:220% center; } }
 @keyframes draw { to { stroke-dashoffset:0; } }
+@keyframes rose-pop { 0% { opacity:0; transform:translate(-50%,15px) scale(.15) rotate(0deg); } 22% { opacity:1; transform:translate(calc(-50% + var(--rose-x)),var(--rose-y)) scale(1.12) rotate(var(--rose-r)); } 42% { opacity:1; transform:translate(calc(-50% + var(--rose-x)),var(--rose-y)) scale(.96) rotate(var(--rose-r)); } 100% { opacity:0; transform:translate(calc(-50% + var(--rose-x)),calc(var(--rose-y) - 26px)) scale(.8) rotate(var(--rose-r)); } }
 
 @media (max-width:760px) {
   .intro-border,.gold-frame { inset:12px; }
