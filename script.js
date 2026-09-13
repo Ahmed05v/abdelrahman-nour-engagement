@@ -17,7 +17,10 @@ function createRoseBurst() {
   for (let index = 0; index < roseCount; index += 1) {
     const rose = document.createElement('span');
     const angle = (index / roseCount) * Math.PI * 2 + (Math.random() - .5) * .7;
-    const distance = Math.min(envelopeBounds.width * .7, 180) * (.72 + Math.random() * .4);
+    const maxDistance = isMobile
+      ? Math.min(envelopeBounds.width * .42, 130)
+      : Math.min(envelopeBounds.width * .7, 180);
+    const distance = maxDistance * (.72 + Math.random() * .4);
     const size = isMobile ? 27 + Math.random() * 24 : 32 + Math.random() * 31;
 
     rose.className = 'burst-rose';
