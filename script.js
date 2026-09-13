@@ -3,6 +3,40 @@ const intro = document.querySelector('#intro');
 const openButton = document.querySelector('#openButton');
 const content = document.querySelector('#content');
 
+function createRoseBurst() {
+  const burst = document.createElement('div');
+  const envelopeBounds = openButton.getBoundingClientRect();
+  const roseCount = window.matchMedia('(max-width: 760px)').matches ? 10 : 18;
+
+  burst.className = 'rose-burst';
+  burst.setAttribute('aria-hidden', 'true');
+  burst.style.left = `${envelopeBounds.left + envelopeBounds.width / 2}px`;
+  burst.style.top = `${envelopeBounds.top + envelopeBounds.height / 2}px`;
+
+  for (let index = 0; index < roseCount; index += 1) {
+    const rose = document.createElement('span');
+    const angle = (index / roseCount) * Math.PI * 2 + (Math.random() - .5) * .7;
+    const distance = Math.min(envelopeBounds.width * .7, 180) * (.72 + Math.random() * .4);
+    const size = 23 + Math.random() * 25;
+
+    rose.className = 'burst-rose';
+    rose.textContent = '🌹';
+    rose.style.setProperty('--rose-x', `${Math.cos(angle) * distance}px`);
+    rose.style.setProperty('--rose-y', `${Math.sin(angle) * distance - 35}px`);
+    rose.style.setProperty('--rose-mid-x', `${Math.cos(angle) * distance * .55}px`);
+    rose.style.setProperty('--rose-mid-y', `${(Math.sin(angle) * distance - 35) * .55}px`);
+    rose.style.setProperty('--rose-end-x', `${Math.cos(angle) * distance * 1.12}px`);
+    rose.style.setProperty('--rose-end-y', `${(Math.sin(angle) * distance - 35) * 1.12 - 18}px`);
+    rose.style.setProperty('--rose-size', `${size}px`);
+    rose.style.setProperty('--rose-rotation', `${Math.round(Math.random() * 70 - 35)}deg`);
+    rose.style.setProperty('--rose-delay', `${Math.random() * 100}ms`);
+    burst.appendChild(rose);
+  }
+
+  intro.appendChild(burst);
+  window.setTimeout(() => burst.remove(), 2100);
+}
+
 function text(id, value) {
   const element = document.querySelector(`#${id}`);
   if (element) element.textContent = value;
@@ -22,6 +56,7 @@ if (config.mapUrl) mapButton.href = config.mapUrl;
 
 openButton.addEventListener('click', () => {
   if (intro.classList.contains('open')) return;
+  createRoseBurst();
   intro.classList.add('open');
   content.classList.add('visible');
   content.setAttribute('aria-hidden', 'false');
